@@ -4,18 +4,28 @@ A brief description of the behavior of Array and Slices in the Go Programming la
 
 ## Lessons Learned
 
-Arrays and Slices behave differently when creating new variables from an
-existing one. A brief description of the differences that have given me a
+Arrays and Slices behave differently when creating new variables from
+existing ones. A brief description of the differences that have given me a
 gotcha moment in some occasion.
 
 ### Discrete(Array) vs Composite(Slice) types
 
-They behave as discrete types, creating a new var in Go allocates a certain
-amount of memory, so when we create an Array var from another one go allocates
-enough memory to copy over the whole chunk of memory from the original array
-to the new location.
+Arrays behave as discrete types, creating a new var in Go allocates a certain
+amount of memory, so when we create an Array var from another variable go allocates
+enough memory to copy over the whole chunk from the original array to the new location.
 
-    **-----Insert image here----**
+This is easiar to visualize if we break apart the operations instead of doing it in a
+single expresion:
+
+![image](https://github.com/user-attachments/assets/c305670b-a79b-4ad9-bfb7-5cd449925ae5)
+
+Then we do the assignment:
+
+![image](https://github.com/user-attachments/assets/38a20f11-9698-4e78-ab7a-7c29ae564a21)
+
+This is the same than doing it all at once like so:
+
+![image](https://github.com/user-attachments/assets/cf08c2f6-3027-4fc2-b59b-59e572782eae)
 
 This might be confusing with the behavior of slices, which are a composite
 type, that means they are composed of 3 fields, a len, a cap and a pointer
@@ -57,13 +67,13 @@ original backing array pointer.
 
 ### Usage/Examples
 
-    ```go
-    package main
+```go
+package main
 
-    func main() {
-        fmt.Println("pending...")
-    }
-    ```
+func main() {
+	fmt.Println("pending...")
+}
+```
 
 ## Screenshots
 
