@@ -35,7 +35,7 @@ to the memory location of the backing array for the slice elements.
 
 What that means is that creating a new variable from another slice var,
 will copy the composite structure (struct) of the slice, along with the pointer,
-they will share the same backing array (pointer) and memory location, 
+they will share the same backing array (pointer) and memory location,
 in memory it would look something like this.
 
 ![image](https://github.com/user-attachments/assets/bfbdac7a-8433-4508-8fc4-ca62f52abb27)
@@ -56,7 +56,7 @@ Once that happens the two slices no longer share the backing array in memory and
 elements in either won't affect the other, since the original one will still point to the
 first backing array.
 
-## To summarize:
+## To summarize
 
 ### Array Behavior when creating a new var from an existing array var
 
@@ -72,4 +72,3 @@ first backing array.
 3. Once we start appending to either slice, and not enough capacity, a new bigger
    backing backing array with more capacity is created, and the pointer in the slice
    updated to point to this new memory location.
-
