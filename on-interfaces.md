@@ -64,7 +64,7 @@ func printSrcToStdout(src io.Reader) {
 }
 ```
 
-This way we achieve several things, decouple client/consumers from
+This way we achieve several things, decouple producer/client from
 having to know inner library implementation, API contract can be
 fulfilled without forcing concrete types, useful to avoid circular
 dependencies, promotes dependency injection by design, makes testing
