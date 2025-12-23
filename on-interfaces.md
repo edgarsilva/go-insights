@@ -267,7 +267,7 @@ possible and the use case warrants it.
 There's a saying in Go that goes like this ->
 
 > Accept interfaces and return concrete types.
-
+>
 > Efficient Go (probably)
 
 Of course there are exceptions to this rule, but in general it's a good rule
