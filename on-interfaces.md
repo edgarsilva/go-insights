@@ -162,7 +162,7 @@ that has high potential for reuse.
 
 ## Interfaces No Bueno Practices (AKA Bad Practices)
 
-### Interface Pollution Foot 🦶 Guns 󰜃
+### Interface Pollution Foot 🦶 Guns 🔫
 
 Most common is overusing them and creating unnecessary abstractions. You should
 always start with the simplest solution (concrete types like structs) and
@@ -264,7 +264,11 @@ interface restricts flexibility and forces clients to a single abstraction.
 In go this means return structs instead of interfaces, and accept Interfaces if
 possible and the use case warrants it.
 
-There's a saying in Go that `Accept interfaces and return concrete types`.
+There's a saying in Go that goes like this ->
+
+> Accept interfaces and return concrete types.
+
+> Efficient Go (probably)
 
 Of course there are exceptions to this rule, but in general it's a good rule
 of thumb. The most common one is the `Error Type` which is an interface often
