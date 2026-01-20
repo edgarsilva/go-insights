@@ -78,9 +78,15 @@ A test example of this could be as follows:
 func TestCopySrcToDst(t *testing.T) {
     cost input = "foo"
     src := strings.NewReader(input)
-    dst := bytes.NewBuffer(make([]byte, 0))
+    src2 := bytes.NewBuffer(make([]byte, 0))
+    src2.WriteString("hello world")
 
-    err := CopySrcToDst(dst, src)
+    err := printSrcToStdout(src)
+    if err != nil {
+        t.FailNow()
+    }
+
+    err := printSrcToStdout(src2)
     if err != nil {
         t.FailNow()
     }
