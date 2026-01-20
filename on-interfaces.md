@@ -76,26 +76,41 @@ A test example of this could be as follows:
 
 ```go
 func TestCopySrcToDst(t *testing.T) {
-    cost input = "foo"
-    src := strings.NewReader(input)
-    src2 := bytes.NewBuffer(make([]byte, 0))
-    src2.WriteString("hello world")
+	const input1 = "foo"
+	const input2 = "hello world"
 
-    err := printSrcToStdout(src)
-    if err != nil {
-        t.FailNow()
-    }
+	src1 := strings.NewReader(input1)
+	src2 := bytes.NewBuffer(nil)
+	src2.WriteString(input2)
 
-    err := printSrcToStdout(src2)
-    if err != nil {
-        t.FailNow()
-    }
+	// Capture stdout
+	oldStdout := os.Stdout
+	r, w, err := os.Pipe()
+	if err != nil {
+		t.Fatal(err)
+	}
+	os.Stdout = w
 
-    got := dst.String()
-    if got != input {
-        t.Errorf("Expected: %s, got: %s", input, got)
-    }
+	// Run
+	printSrcToStdout(src1)
+	printSrcToStdout(src2)
+
+	// Restore stdout
+	_ = w.Close()
+	os.Stdout = oldStdout
+
+	// Read captured output
+	var buf bytes.Buffer
+	_, _ = io.Copy(&buf, r)
+
+	got := buf.String()
+	want := input1 + input2
+
+	if got != want {
+		t.Errorf("expected %q, got %q", want, got)
+	}
 }
+
 ```
 
 You can see here that the behavior/implementation of the `CopySrcToDst` func
