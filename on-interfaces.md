@@ -162,19 +162,27 @@ that has high potential for reuse.
 
 ## Interfaces No Bueno Practices (AKA Bad Practices)
 
+### TL;DR
+1. Don't create unncessary abstractions (interfaces):
+    a. start with a simple solution (concrete types), refactor when the need arises.
+    b. Create an interface when needed, not whee you foresee you might need it.
+2. Interfaces should leave on the consumer side.
+3. Never put interfaces on the producer side (or extremely rarely e.g. error interface).
+4. Never return interfaces from a function/method.
+
 ### Interface Pollution Foot 🦶 Guns 🔫
 
 Most common is overusing them and creating unnecessary abstractions. You should
 always start with the simplest solution (concrete types like structs) and
 refactor it into a more complex one when the need arises.
 
-> Start with concrete types, refactor into interfaces when needed.
+#### **Start with concrete types, refactor into interfaces when needed.**
 
 In Go it is almost always a mistake to start with an abstraction, in this cause
 an `interface`, forgetting one of the main tenants of programming an
 abstraction:
 
-> Abstractions should be discovered, not created.
+#### **Abstractions should be discovered, not created.**
 
 What the means is that we shouldn't start creating abstractions in our code if
 there is no immediate and clear need for it.
@@ -196,14 +204,14 @@ indirection that don't add any value to the code.
 
 ### Where should interfaces live?
 
-> Interfaces should live on the **Consumer** side.
+#### **Interfaces should live on the **Consumer** side.**
 
 But where is this?
 
 This is where the interface is being used, not where the concrete type that
 meets the interface requirements is defined, we call that the **Producer** side.
 
-> Don't put interfaces in the **Producer** side.
+#### **Don't put interfaces in the **Producer** side.**
 
 An exaple of this, in one application we have a Service Auth `auth/service.go`,
 this service accepts `Strategies` that satisfy the `auth.Strategy`
@@ -245,12 +253,12 @@ func (s *LogtoStrategy) Authenticate(c *fiber.Ctx) (model.User, error) {
 }
 ```
 
-> TL;DR You should put interfaces in the consumer side (where the interface is
-> being used), not the producer side (where the concrete type is defined).
+#### **You should put interfaces in the consumer side (where the interface is being used),
+not the producer side (where the concrete type is defined).**
 
 ### Returning Interfaces from functions/methods
 
-Short answer `don't do it, it's a bad idea 99.999%`.
+Short answer **don't do it, it's a bad idea 99.999%**.
 
 In most cases you should never return an interface from a function/method, it's
 considered a bad practice in Go, and it's a sign of bad design. Returning an
